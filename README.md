@@ -18,7 +18,7 @@ To sync the Helm chart to your cluster, you can run `helm template` and commit t
         `helm template my-cert-manager cert-manager --namespace cert-manager --output-dir manifests`.
 3. Check in the rendered manifests and commit to your repo.
 4. Configure your ConfigManagement object or RootSync object as below:
-    ```
+    ```yaml
     # config-management.yaml
     
     apiVersion: configmanagement.gke.io/v1
@@ -28,6 +28,8 @@ To sync the Helm chart to your cluster, you can run `helm template` and commit t
     spec:
       # clusterName is required and must be unique among all managed clusters
       clusterName: my-cluster
+      enableMultiRepo: true
+      enableLegacyFields: true
       git:
         syncRepo: https://github.com/nan-yu/cert-manager-example
         syncBranch: main
@@ -37,7 +39,7 @@ To sync the Helm chart to your cluster, you can run `helm template` and commit t
     ```
     
     OR
-    ```
+    ```yaml
     # root-sync.yaml
     # If you are using a Config Sync version earlier than 1.7,
     # use: apiVersion: configsync.gke.io/v1alpha1
