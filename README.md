@@ -57,3 +57,9 @@ To sync the Helm chart to your cluster, you can run `helm template` and commit t
       sourceFormat: unstructured
     ```
 5. Verify the resources are successfully synced to your cluster.
+
+# Uninstall the cert-manager chart
+1. Remove the rendered manifests from the repo: `git rm -rf manifests/cert-manager && git commit -m "uninstall cert-manager" && git push origin main`
+2. Wait until RootSync is synced successfully.
+3. Remove the `cert-manager` namespace from the repo: `git rm manifests/namespace-cert-manager.yaml && git commit -m "remove the cert-manager namespace" && git push origin main`
+4. Wait until RootSync is synced successfully.
